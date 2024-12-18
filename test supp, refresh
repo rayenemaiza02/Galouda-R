@@ -1,0 +1,44 @@
+void
+on_DELETE_clicked                      (GtkButton       *button,
+                                        gpointer         user_data)
+                             
+{	
+	GtkTreeModel *model;
+	GtkTreeSelection *selection;
+	GtkTreeIter iter;
+	GtkWidget *treeview1;
+	gchar *id;
+
+	treeview1=lookup_widget(button,"treeview1");
+
+	selection=gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview1));
+	if(gtk_tree_selection_get_selected(selection,&model,&iter))
+	{
+	gtk_tree_model_get(model,&iter,0,&id,-1);
+	gtk_list_store_remove(GTK_LIST_STORE(model),&iter);
+
+	supprimer(id);
+
+}
+
+void
+on_refresh_clicked                     (GtkButton       *button,
+                                        gpointer         user_data)
+{
+GtkWidget *window5,*w1;
+GtkWidget *treeview1;
+
+w1=lookup_widget(button,"window5");
+window5=create_window5();
+
+gtk_widget_show(window5);
+
+gtk_widget_hide(w1);
+
+treeview1=lookup_widget(window5,"treeview1");
+afficher(treeview1);
+}
+
+}
+
+
